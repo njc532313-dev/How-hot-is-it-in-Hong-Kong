@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>三種溫度測量，有何不同？</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F0EFEB;
+    --ink:#58402E;
+    --grid:rgba(88,64,46,.18);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:Inter,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif}
+  body{padding:18px;-webkit-font-smoothing:antialiased}
+  main{width:min(1480px,100%);margin:0 auto}
+  .knowledge-section{border-top:1px solid var(--ink);padding-top:16px}
+  .knowledge-header{padding-bottom:12px;border-bottom:1px solid var(--grid)}
+  h1{margin:0;font-size:clamp(36px,3.5vw,56px);line-height:1;letter-spacing:-.04em;font-weight:800}
+  .knowledge-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch;gap:24px;padding:22px 0 24px}
+  .knowledge-card{position:relative;isolation:isolate;min-width:0;height:720px;overflow:hidden;border:1px solid rgba(255,255,255,.36);border-radius:34px;background:var(--wash);box-shadow:0 24px 70px rgba(55,43,33,.12)}
+  .knowledge-card::before{content:"";position:absolute;z-index:-2;inset:-22px;background:var(--image) center/cover no-repeat;filter:blur(24px) saturate(.92);opacity:.9}
+  .knowledge-card::after{content:"";position:absolute;z-index:0;inset:auto 0 0;height:54%;background:linear-gradient(to bottom,rgba(var(--glass-rgb),0),rgba(var(--glass-rgb),.56) 31%,rgba(var(--glass-rgb),.92) 100%);-webkit-backdrop-filter:blur(22px) saturate(118%);backdrop-filter:blur(22px) saturate(118%);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.28) 13%,#000 34%);mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.28) 13%,#000 34%);pointer-events:none}
+  .knowledge-card-media{position:absolute;z-index:-1;inset:0 auto auto 0;width:100%;background:var(--wash)}
+  .knowledge-card img{display:block;width:100%;height:auto;mix-blend-mode:multiply}
+  .knowledge-copy{position:absolute;z-index:1;inset:auto 0 0;height:48%;display:flex;flex-direction:column;align-items:flex-start;padding:24px 28px 26px;color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.32)}
+  .knowledge-badge,.knowledge-tag{border:1px solid rgba(255,255,255,.28);background:rgba(var(--glass-rgb),.56);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+  .knowledge-badge{display:inline-flex;align-items:center;min-height:34px;padding:8px 14px;border-radius:999px;font-size:14px;line-height:1;font-weight:700;letter-spacing:.04em}
+  .knowledge-copy h2{margin:13px 0 8px;color:#fff;font-size:clamp(32px,2.6vw,42px);line-height:1.04;letter-spacing:-.04em;font-weight:800}
+  .knowledge-copy p{margin:0;font-size:15px;line-height:1.52;font-weight:500;color:rgba(255,255,255,.94);overflow-wrap:anywhere}
+  .knowledge-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+  .knowledge-tag{padding:8px 13px;border-radius:999px;font-size:14px;line-height:1.15;font-weight:700;text-shadow:none}
+  @media (max-width:900px){
+    body{padding:16px}
+    .knowledge-grid{grid-template-columns:1fr;gap:20px}
+    .knowledge-card{height:720px;border-radius:30px}
+    .knowledge-card::after{height:59%}
+    .knowledge-copy{height:53%;padding:23px 24px 24px}
+    .knowledge-copy h2{font-size:34px}
+    .knowledge-copy p{font-size:15px;line-height:1.48}
+  }
+  @media (prefers-reduced-transparency:reduce){
+    .knowledge-card::after{background:linear-gradient(to bottom,transparent,rgba(var(--glass-rgb),.96) 32%);-webkit-backdrop-filter:none;backdrop-filter:none}
+    .knowledge-badge,.knowledge-tag{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(var(--glass-rgb),.88)}
+  }
+</style>
+</head>
+<body>
+<main>
+  <section class="knowledge-section" aria-labelledby="knowledge-title">
+    <header class="knowledge-header">
+      <h1 id="knowledge-title">三種溫度測量，有何不同？</h1>
+    </header>
+    <div class="knowledge-grid">
+      <article class="knowledge-card" style="--wash:#F7E2D7;--glass-rgb:139,78,61;--image:url('assets/dry-bulb-thermometer.png')">
+        <div class="knowledge-card-media">
+          <img src="assets/dry-bulb-thermometer.png" alt="乾球溫度計水彩插畫" width="1278" height="1230">
+        </div>
+        <div class="knowledge-copy">
+          <span class="knowledge-badge">空氣溫度測量</span>
+          <h2>乾球氣溫</h2>
+          <p>常規氣象站測得的環境空氣溫度。</p>
+          <div class="knowledge-tags" aria-label="分類">
+            <span class="knowledge-tag">基準溫度</span>
+            <span class="knowledge-tag">氣象觀測</span>
+          </div>
+        </div>
+      </article>
+      <article class="knowledge-card" style="--wash:#E1EFF8;--glass-rgb:49,91,121;--image:url('assets/globe-thermometer.png')">
+        <div class="knowledge-card-media">
+          <img src="assets/globe-thermometer.png" alt="黑球溫度計水彩插畫" width="1254" height="1254">
+        </div>
+        <div class="knowledge-copy">
+          <span class="knowledge-badge">輻射熱測量</span>
+          <h2>黑球溫度</h2>
+          <p>透過放在表面塗黑的中空銅球內的感應器，模擬人體吸收太陽直射以及高樓、地面反射的輻射熱，量化環境對人體的熱積累負荷。</p>
+          <div class="knowledge-tags" aria-label="分類">
+            <span class="knowledge-tag">太陽輻射</span>
+            <span class="knowledge-tag">熱負荷</span>
+          </div>
+        </div>
+      </article>
+      <article class="knowledge-card" style="--wash:#E4ECDF;--glass-rgb:72,91,58;--image:url('assets/wet-bulb-thermometer.png')">
+        <div class="knowledge-card-media">
+          <img src="assets/wet-bulb-thermometer.png" alt="濕球溫度計水彩插畫" width="1254" height="1254">
+        </div>
+        <div class="knowledge-copy">
+          <span class="knowledge-badge">蒸發散熱測量</span>
+          <h2>自然濕球溫度</h2>
+          <p>透過包裹濕布的感應器，模擬在當前空氣濕度與風速下，人體皮膚表面汗液蒸發的冷卻極限。由於高濕度會顯著降低蒸發效率，濕球溫度直接反映了人體能否透過排汗實現有效散熱。</p>
+          <div class="knowledge-tags" aria-label="分類">
+            <span class="knowledge-tag">空氣濕度</span>
+            <span class="knowledge-tag">排汗散熱</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+</body>
+</html>
