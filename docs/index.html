@@ -247,6 +247,9 @@ select(0,true);
   h1{font-size:clamp(22px,3vw,34px);line-height:1.2;font-weight:700;letter-spacing:-.025em;margin-bottom:8px}
   .sub{font-size:13px;line-height:1.65;color:var(--muted);margin-bottom:12px}
   .chart-wrap{width:100%;overflow-x:auto}
+  .reading{min-height:46px;margin:8px 0 0;padding:10px 14px;border:1px solid var(--grid);border-radius:10px;font-size:13px;line-height:1.6}
+  .point-hit{cursor:pointer}
+  .point-hit:focus-visible{stroke:var(--ink);stroke-width:1.5}
   svg{width:100%;min-width:720px;height:auto;display:block;margin:0 auto}
   svg text{font-family:&#x27;Inter&#x27;,&#x27;PingFang TC&#x27;,&#x27;Noto Sans TC&#x27;,sans-serif}
   .fade{animation:fade .9s ease both}@keyframes fade{from{opacity:0}}
@@ -261,11 +264,12 @@ select(0,true);
 &lt;main class=&quot;card&quot;&gt;
   &lt;h1&gt;1979 至 2026 年各年 8 月全球平均地表氣溫距平&lt;/h1&gt;
   &lt;div class=&quot;chart-wrap&quot;&gt;
-    &lt;svg id=&quot;chart&quot; viewBox=&quot;0 0 1200 500&quot; role=&quot;img&quot; aria-labelledby=&quot;chart-title chart-desc&quot;&gt;
+    &lt;svg id=&quot;chart&quot; viewBox=&quot;0 0 1200 500&quot; aria-labelledby=&quot;chart-title chart-desc&quot;&gt;
       &lt;title id=&quot;chart-title&quot;&gt;1979 至 2026 年各年 8 月全球平均地表氣溫距平&lt;/title&gt;
       &lt;desc id=&quot;chart-desc&quot;&gt;縱軸為相對於 1991 至 2020 年平均的攝氏距平。每年以一個圓點和一條從平均線延伸的灰色虛線表示，圓點以灰色曲線連接；低於平均值的圓點為藍色，高於平均值的圓點為赭紅色。基準溫度為 16.11°C，2026 年為 +0.85°C。&lt;/desc&gt;
     &lt;/svg&gt;
   &lt;/div&gt;
+  &lt;p id=&quot;reading&quot; class=&quot;reading&quot; aria-live=&quot;polite&quot;&gt;將滑鼠移到圓點上，或點按／按 Tab 鍵選取年份，查看氣溫。&lt;/p&gt;
   &lt;div class=&quot;src&quot;&gt;數值採 ERA5；距平基準為 1991–2020。來源：&lt;a href=&quot;https://climate.copernicus.eu/surface-air-temperature-august-2026&quot; target=&quot;_blank&quot; rel=&quot;noreferrer&quot;&gt;哥白尼 2026 年 8 月公告&lt;/a&gt; · &lt;a href=&quot;https://climate.copernicus.eu/sites/default/files/2026-09/C3S_Bulletin_temp_202608_FigH1_monthly_global_surface_temperature_DATA.csv&quot; target=&quot;_blank&quot; rel=&quot;noreferrer&quot;&gt;原始資料 CSV&lt;/a&gt;&lt;/div&gt;
 &lt;/main&gt;
 &lt;script&gt;
@@ -295,8 +299,13 @@ const draw=()=&gt;{
   el(s,&#x27;path&#x27;,{d:path,fill:&#x27;none&#x27;,stroke:C.faint,&#x27;stroke-width&#x27;:1.6,class:&#x27;fade&#x27;});
   DATA.forEach((d,i)=&gt;{
     const hero=d.year===2026,color=d.anom&lt;0?C.blue:C.red;
-    const dot=el(s,&#x27;circle&#x27;,{cx:x(i),cy:y(d.anom),r:hero?5.5:2.5,fill:color,stroke:hero?C.ink:&#x27;none&#x27;,&#x27;stroke-width&#x27;:hero?1.4:0,class:&#x27;pop&#x27;,style:`animation-delay:${.18+i*.012}s`,tabindex:0,role:&#x27;img&#x27;});
-    const title=el(dot,&#x27;title&#x27;,{});title.textContent=`${d.year} 年 8 月：距平 ${d.anom&gt;=0?&#x27;+&#x27;:&#x27;&#x27;}${d.anom.toFixed(2)}°C；全球平均 ${d.temp.toFixed(2)}°C`;
+    el(s,&#x27;circle&#x27;,{cx:x(i),cy:y(d.anom),r:hero?5.5:2.5,fill:color,stroke:hero?C.ink:&#x27;none&#x27;,&#x27;stroke-width&#x27;:hero?1.4:0,class:&#x27;pop&#x27;,style:`animation-delay:${.18+i*.012}s`});
+    const label=`${d.year} 年 8 月：全球平均氣溫 ${d.temp.toFixed(2)}°C；距平 ${d.anom&gt;=0?&#x27;+&#x27;:&#x27;&#x27;}${d.anom.toFixed(2)}°C`;
+    const hit=el(s,&#x27;circle&#x27;,{cx:x(i),cy:y(d.anom),r:10,fill:&#x27;transparent&#x27;,class:&#x27;point-hit&#x27;,tabindex:0,role:&#x27;button&#x27;,&#x27;aria-label&#x27;:label});
+    const show=()=&gt;document.getElementById(&#x27;reading&#x27;).textContent=label;
+    hit.addEventListener(&#x27;pointerenter&#x27;,show);
+    hit.addEventListener(&#x27;focus&#x27;,show);
+    hit.addEventListener(&#x27;click&#x27;,show);
   });
   DATA.forEach((d,i)=&gt;{
     if((d.year%5===0&amp;&amp;d.year!==2025)||d.year===1979||d.year===2026){
@@ -317,7 +326,7 @@ const draw=()=&gt;{
 };
 const svg=document.getElementById(&#x27;chart&#x27;);
 const observer=new IntersectionObserver(entries=&gt;{if(entries[0].isIntersecting){draw();observer.disconnect()}},{threshold:.2});
-observer.observe(svg);svg.addEventListener(&#x27;click&#x27;,draw);
+observer.observe(svg);
 &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
