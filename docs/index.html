@@ -247,7 +247,6 @@ select(0,true);
   h1{font-size:clamp(22px,3vw,34px);line-height:1.2;font-weight:700;letter-spacing:-.025em;margin-bottom:8px}
   .sub{font-size:13px;line-height:1.65;color:var(--muted);margin-bottom:12px}
   .chart-wrap{width:100%;overflow-x:auto}
-  .reading{min-height:46px;margin:8px 0 0;padding:10px 14px;border:1px solid var(--grid);border-radius:10px;font-size:13px;line-height:1.6}
   .point-hit{cursor:pointer}
   .point-hit:focus-visible{stroke:var(--ink);stroke-width:1.5}
   svg{width:100%;min-width:720px;height:auto;display:block;margin:0 auto}
@@ -269,7 +268,6 @@ select(0,true);
       &lt;desc id=&quot;chart-desc&quot;&gt;縱軸為相對於 1991 至 2020 年平均的攝氏距平。每年以一個圓點和一條從平均線延伸的灰色虛線表示，圓點以灰色曲線連接；低於平均值的圓點為藍色，高於平均值的圓點為赭紅色。基準溫度為 16.11°C，2026 年為 +0.85°C。&lt;/desc&gt;
     &lt;/svg&gt;
   &lt;/div&gt;
-  &lt;p id=&quot;reading&quot; class=&quot;reading&quot; aria-live=&quot;polite&quot;&gt;將滑鼠移到圓點上，或點按／按 Tab 鍵選取年份，查看氣溫。&lt;/p&gt;
   &lt;div class=&quot;src&quot;&gt;數值採 ERA5；距平基準為 1991–2020。來源：&lt;a href=&quot;https://climate.copernicus.eu/surface-air-temperature-august-2026&quot; target=&quot;_blank&quot; rel=&quot;noreferrer&quot;&gt;哥白尼 2026 年 8 月公告&lt;/a&gt; · &lt;a href=&quot;https://climate.copernicus.eu/sites/default/files/2026-09/C3S_Bulletin_temp_202608_FigH1_monthly_global_surface_temperature_DATA.csv&quot; target=&quot;_blank&quot; rel=&quot;noreferrer&quot;&gt;原始資料 CSV&lt;/a&gt;&lt;/div&gt;
 &lt;/main&gt;
 &lt;script&gt;
@@ -302,7 +300,12 @@ const draw=()=&gt;{
     el(s,&#x27;circle&#x27;,{cx:x(i),cy:y(d.anom),r:hero?5.5:2.5,fill:color,stroke:hero?C.ink:&#x27;none&#x27;,&#x27;stroke-width&#x27;:hero?1.4:0,class:&#x27;pop&#x27;,style:`animation-delay:${.18+i*.012}s`});
     const label=`${d.year} 年 8 月：全球平均氣溫 ${d.temp.toFixed(2)}°C；距平 ${d.anom&gt;=0?&#x27;+&#x27;:&#x27;&#x27;}${d.anom.toFixed(2)}°C`;
     const hit=el(s,&#x27;circle&#x27;,{cx:x(i),cy:y(d.anom),r:10,fill:&#x27;transparent&#x27;,class:&#x27;point-hit&#x27;,tabindex:0,role:&#x27;button&#x27;,&#x27;aria-label&#x27;:label});
-    const show=()=&gt;document.getElementById(&#x27;reading&#x27;).textContent=label;
+    const show=()=&gt;{
+      document.getElementById(&#x27;point-card&#x27;)?.remove();
+      const card=el(s,&#x27;g&#x27;,{id:&#x27;point-card&#x27;,&#x27;pointer-events&#x27;:&#x27;none&#x27;});
+      el(card,&#x27;rect&#x27;,{x:x(i)-42,y:y(d.anom)-47,width:84,height:32,rx:8,fill:&#x27;#fff&#x27;,stroke:C.grid,&#x27;stroke-width&#x27;:1});
+      txt(card,{x:x(i),y:y(d.anom)-26,&#x27;font-size&#x27;:13,&#x27;font-weight&#x27;:700,fill:C.ink,&#x27;text-anchor&#x27;:&#x27;middle&#x27;},`${d.temp.toFixed(2)}°C`);
+    };
     hit.addEventListener(&#x27;pointerenter&#x27;,show);
     hit.addEventListener(&#x27;focus&#x27;,show);
     hit.addEventListener(&#x27;click&#x27;,show);
@@ -317,8 +320,7 @@ const draw=()=&gt;{
   txt(s,{x:left,y:top-25,&#x27;font-size&#x27;:9,&#x27;font-weight&#x27;:700,fill:C.muted,&#x27;letter-spacing&#x27;:&#x27;.08em&#x27;,class:&#x27;fade&#x27;},&#x27;距平（°C）&#x27;);
   const referenceTemp=DATA[0].temp-DATA[0].anom;
   txt(s,{x:right-8,y:zeroY+17,&#x27;font-size&#x27;:9,&#x27;font-weight&#x27;:700,fill:C.muted,&#x27;text-anchor&#x27;:&#x27;end&#x27;,class:&#x27;fade&#x27;},`1991–2020 年 8 月基準 ${referenceTemp.toFixed(2)}°C`);
-  const last=DATA[DATA.length-1],previous=DATA.find(d=&gt;d.year===2024);
-  txt(s,{x:right-4,y:y(last.anom)-13,&#x27;font-size&#x27;:11,&#x27;font-weight&#x27;:800,fill:C.ink,&#x27;text-anchor&#x27;:&#x27;end&#x27;,class:&#x27;fade&#x27;},`2026  +${last.anom.toFixed(2)}°C`);
+  const previous=DATA.find(d=&gt;d.year===2024);
   const oldX=(x(44)+x(45))/2;
   txt(s,{x:oldX,y:y(previous.anom)-14,&#x27;font-size&#x27;:9,&#x27;font-weight&#x27;:700,fill:C.muted,&#x27;text-anchor&#x27;:&#x27;middle&#x27;,class:&#x27;fade&#x27;});
   txt(s,{x:left,y:bottom+47,&#x27;font-size&#x27;:8.5,&#x27;font-weight&#x27;:600,fill:C.muted,&#x27;text-anchor&#x27;:&#x27;start&#x27;,class:&#x27;fade&#x27;},&#x27;圓點：藍＝低於平均 · 紅＝高於平均&#x27;);
