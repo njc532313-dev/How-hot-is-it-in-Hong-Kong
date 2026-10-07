@@ -303,8 +303,9 @@ const draw=()=&gt;{
     const show=()=&gt;{
       document.getElementById(&#x27;point-card&#x27;)?.remove();
       const card=el(s,&#x27;g&#x27;,{id:&#x27;point-card&#x27;,&#x27;pointer-events&#x27;:&#x27;none&#x27;});
-      el(card,&#x27;rect&#x27;,{x:x(i)-42,y:y(d.anom)-47,width:84,height:32,rx:8,fill:&#x27;#fff&#x27;,stroke:C.grid,&#x27;stroke-width&#x27;:1});
-      txt(card,{x:x(i),y:y(d.anom)-26,&#x27;font-size&#x27;:13,&#x27;font-weight&#x27;:700,fill:C.ink,&#x27;text-anchor&#x27;:&#x27;middle&#x27;},`${d.temp.toFixed(2)}°C`);
+      el(card,&#x27;rect&#x27;,{x:x(i)-42,y:y(d.anom)-59,width:84,height:44,rx:8,fill:&#x27;#fff&#x27;,stroke:C.grid,&#x27;stroke-width&#x27;:1});
+      txt(card,{x:x(i),y:y(d.anom)-42,&#x27;font-size&#x27;:10,&#x27;font-weight&#x27;:600,fill:C.muted,&#x27;text-anchor&#x27;:&#x27;middle&#x27;},String(d.year));
+      txt(card,{x:x(i),y:y(d.anom)-25,&#x27;font-size&#x27;:13,&#x27;font-weight&#x27;:700,fill:C.ink,&#x27;text-anchor&#x27;:&#x27;middle&#x27;},`${d.temp.toFixed(2)}°C`);
     };
     hit.addEventListener(&#x27;pointerenter&#x27;,show);
     hit.addEventListener(&#x27;focus&#x27;,show);
