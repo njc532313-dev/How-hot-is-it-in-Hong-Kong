@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>1979 至 2026 年各年 8 月全球平均地表氣溫距平</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#F0EFEB;--ink:#1C1C1A;--muted:#8F8E88;--faint:#B5BAC1;--grid:#E4E7EB}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);font-family:'Inter','PingFang TC','Noto Sans TC',sans-serif;color:var(--ink);padding:32px;-webkit-font-smoothing:antialiased}
+  .card{max-width:1280px;margin:0 auto;background:var(--bg);border-radius:24px;padding:28px 30px 22px}
+  .badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.08em;padding:3px 10px;border-radius:99px;margin-bottom:10px;border:1px dashed var(--faint);color:var(--muted)}
+  h1{font-size:clamp(22px,3vw,34px);line-height:1.2;font-weight:700;letter-spacing:-.025em;margin-bottom:8px}
+  .sub{font-size:13px;line-height:1.65;color:var(--muted);margin-bottom:12px}
+  .chart-wrap{width:100%;overflow-x:auto}
+  svg{width:100%;min-width:720px;height:auto;display:block;margin:0 auto}
+  svg text{font-family:'Inter','PingFang TC','Noto Sans TC',sans-serif}
+  .fade{animation:fade .9s ease both}@keyframes fade{from{opacity:0}}
+  .pop{transform-box:fill-box;transform-origin:center;animation:pop .5s cubic-bezier(.2,.7,.3,1.3) both}@keyframes pop{from{transform:scale(0)}to{transform:none}}
+  @media(prefers-reduced-motion:reduce){.fade,.pop{animation:none}}
+  .src{font-size:10px;color:var(--muted);margin-top:9px;line-height:1.7;letter-spacing:.02em}
+  .src a{color:inherit;text-underline-offset:2px}
+  @media(max-width:640px){body{padding:12px}.card{padding:22px 16px 18px}.sub{font-size:12px}}
+</style>
+</head>
+<body>
+<main class="card">
+  <h1>1979 至 2026 年各年 8 月全球平均地表氣溫距平</h1>
+  <div class="chart-wrap">
+    <svg id="chart" viewBox="0 0 1200 500" role="img" aria-labelledby="chart-title chart-desc">
+      <title id="chart-title">1979 至 2026 年各年 8 月全球平均地表氣溫距平</title>
+      <desc id="chart-desc">縱軸為相對於 1991 至 2020 年平均的攝氏距平。每年以一個圓點和一條從平均線延伸的灰色虛線表示，圓點以灰色曲線連接；低於平均值的圓點為藍色，高於平均值的圓點為赭紅色。基準溫度為 16.11°C，2026 年為 +0.85°C。</desc>
+    </svg>
+  </div>
+  <div class="src">數值採 ERA5；距平基準為 1991–2020。來源：<a href="https://climate.copernicus.eu/surface-air-temperature-august-2026" target="_blank" rel="noreferrer">哥白尼 2026 年 8 月公告</a> · <a href="https://climate.copernicus.eu/sites/default/files/2026-09/C3S_Bulletin_temp_202608_FigH1_monthly_global_surface_temperature_DATA.csv" target="_blank" rel="noreferrer">原始資料 CSV</a></div>
+</main>
+<script>
+const DATA=[{"year":1979,"temp":15.7023,"anom":-0.4087},{"year":1980,"temp":15.8273,"anom":-0.2837},{"year":1981,"temp":15.8755,"anom":-0.2355},{"year":1982,"temp":15.6579,"anom":-0.4531},{"year":1983,"temp":15.862,"anom":-0.249},{"year":1984,"temp":15.6732,"anom":-0.4378},{"year":1985,"temp":15.7175,"anom":-0.3935},{"year":1986,"temp":15.6745,"anom":-0.4365},{"year":1987,"temp":15.8409,"anom":-0.2701},{"year":1988,"temp":15.9452,"anom":-0.1658},{"year":1989,"temp":15.7901,"anom":-0.3209},{"year":1990,"temp":15.9456,"anom":-0.1654},{"year":1991,"temp":15.972,"anom":-0.139},{"year":1992,"temp":15.6235,"anom":-0.4875},{"year":1993,"temp":15.7272,"anom":-0.3838},{"year":1994,"temp":15.7273,"anom":-0.3837},{"year":1995,"temp":16.0047,"anom":-0.1063},{"year":1996,"temp":16.0001,"anom":-0.111},{"year":1997,"temp":15.9776,"anom":-0.1334},{"year":1998,"temp":16.253,"anom":0.142},{"year":1999,"temp":15.874,"anom":-0.237},{"year":2000,"temp":15.9365,"anom":-0.1745},{"year":2001,"temp":16.0606,"anom":-0.0504},{"year":2002,"temp":16.065,"anom":-0.046},{"year":2003,"temp":16.1575,"anom":0.0465},{"year":2004,"temp":15.95,"anom":-0.161},{"year":2005,"temp":16.1412,"anom":0.0302},{"year":2006,"temp":16.1825,"anom":0.0715},{"year":2007,"temp":16.0928,"anom":-0.0182},{"year":2008,"temp":16.0326,"anom":-0.0785},{"year":2009,"temp":16.1568,"anom":0.0458},{"year":2010,"temp":16.1577,"anom":0.0467},{"year":2011,"temp":16.2223,"anom":0.1113},{"year":2012,"temp":16.1879,"anom":0.0769},{"year":2013,"temp":16.1662,"anom":0.0552},{"year":2014,"temp":16.2474,"anom":0.1364},{"year":2015,"temp":16.3536,"anom":0.2426},{"year":2016,"temp":16.5126,"anom":0.4016},{"year":2017,"temp":16.4073,"anom":0.2963},{"year":2018,"temp":16.3198,"anom":0.2088},{"year":2019,"temp":16.4674,"anom":0.3564},{"year":2020,"temp":16.3781,"anom":0.2671},{"year":2021,"temp":16.4225,"anom":0.3115},{"year":2022,"temp":16.4071,"anom":0.296},{"year":2023,"temp":16.8209,"anom":0.7099},{"year":2024,"temp":16.8224,"anom":0.7114},{"year":2025,"temp":16.6013,"anom":0.4903},{"year":2026,"temp":16.9567,"anom":0.8457}];
+const C={ink:'#1C1C1A',muted:'#8F8E88',faint:'#B5BAC1',grid:'#E4E7EB',blue:'#2B6CB0',red:'#C4502A'};
+const NS='http://www.w3.org/2000/svg';
+const el=(p,t,a)=>{const n=document.createElementNS(NS,t);for(const k in a)n.setAttribute(k,a[k]);p.appendChild(n);return n};
+const txt=(p,a,s)=>{const n=el(p,'text',a);n.textContent=s;return n};
+const rnd=(i,k)=>Math.abs(((i*73856093)^(k*19349663))%1000)/1000;
+const draw=()=>{
+  const s=document.getElementById('chart');s.innerHTML='<title id="chart-title">1979 至 2026 年各年 8 月全球平均地表氣溫距平</title><desc id="chart-desc">年度圓點由灰色細線連接，並以平均線至圓點的灰色虛線顯示距平；低於平均值的圓點為藍色，高於平均值的圓點為赭紅色。基準溫度為 16.11°C。</desc>';
+  const left=94,right=1152,top=58,bottom=397,ymin=-.6,ymax=1;
+  const x=i=>left+i*(right-left)/(DATA.length-1);
+  const y=v=>top+(ymax-v)*(bottom-top)/(ymax-ymin);
+  [-.5,0,.5,1].forEach(v=>{
+    const yy=y(v),isZero=v===0;
+    el(s,'line',{x1:left,y1:yy,x2:right,y2:yy,stroke:C.grid,'stroke-width':isZero?1.35:.8,class:'fade'});
+    txt(s,{x:left-14,y:yy+3,'font-size':9,'font-weight':600,fill:C.muted,'text-anchor':'end',class:'fade'},`${v>0?'+':''}${v.toFixed(1)}°`);
+  });
+  el(s,'line',{x1:left,y1:top,x2:left,y2:bottom,stroke:C.grid,'stroke-width':.8,class:'fade'});
+  const zeroY=y(0);
+  DATA.forEach((d,i)=>{
+    el(s,'line',{x1:x(i),y1:zeroY,x2:x(i),y2:y(d.anom),stroke:C.faint,'stroke-width':1.1,'stroke-dasharray':'2.5 3.5',class:'fade',style:`animation-delay:${i*.008}s`});
+  });
+  el(s,'line',{x1:left,y1:zeroY,x2:right,y2:zeroY,stroke:C.grid,'stroke-width':1.35,class:'fade'});
+  const path=DATA.map((d,i)=>`${i?'L':'M'}${x(i)} ${y(d.anom)}`).join(' ');
+  el(s,'path',{d:path,fill:'none',stroke:C.faint,'stroke-width':1.6,class:'fade'});
+  DATA.forEach((d,i)=>{
+    const hero=d.year===2026,color=d.anom<0?C.blue:C.red;
+    const dot=el(s,'circle',{cx:x(i),cy:y(d.anom),r:hero?5.5:2.5,fill:color,stroke:hero?C.ink:'none','stroke-width':hero?1.4:0,class:'pop',style:`animation-delay:${.18+i*.012}s`,tabindex:0,role:'img'});
+    const title=el(dot,'title',{});title.textContent=`${d.year} 年 8 月：距平 ${d.anom>=0?'+':''}${d.anom.toFixed(2)}°C；全球平均 ${d.temp.toFixed(2)}°C`;
+  });
+  DATA.forEach((d,i)=>{
+    if((d.year%5===0&&d.year!==2025)||d.year===1979||d.year===2026){
+      const xx=x(i);
+      el(s,'line',{x1:xx,y1:bottom,x2:xx,y2:bottom+5,stroke:C.faint,'stroke-width':.8,class:'fade'});
+      txt(s,{x:xx,y:bottom+20,'font-size':8.5,'font-weight':600,fill:C.muted,'text-anchor':'middle',class:'fade'},String(d.year));
+    }
+  });
+  txt(s,{x:left,y:top-25,'font-size':9,'font-weight':700,fill:C.muted,'letter-spacing':'.08em',class:'fade'},'距平（°C）');
+  const referenceTemp=DATA[0].temp-DATA[0].anom;
+  txt(s,{x:right-8,y:zeroY+17,'font-size':9,'font-weight':700,fill:C.muted,'text-anchor':'end',class:'fade'},`1991–2020 年 8 月基準 ${referenceTemp.toFixed(2)}°C`);
+  const last=DATA[DATA.length-1],previous=DATA.find(d=>d.year===2024);
+  txt(s,{x:right-4,y:y(last.anom)-13,'font-size':11,'font-weight':800,fill:C.ink,'text-anchor':'end',class:'fade'},`2026  +${last.anom.toFixed(2)}°C`);
+  const oldX=(x(44)+x(45))/2;
+  txt(s,{x:oldX,y:y(previous.anom)-14,'font-size':9,'font-weight':700,fill:C.muted,'text-anchor':'middle',class:'fade'});
+  txt(s,{x:left,y:bottom+47,'font-size':8.5,'font-weight':600,fill:C.muted,'text-anchor':'start',class:'fade'},'圓點：藍＝低於平均 · 紅＝高於平均');
+  txt(s,{x:right,y:bottom+47,'font-size':8,'font-weight':600,fill:C.muted,'text-anchor':'end','letter-spacing':'.04em',class:'fade'},'每個圓點 = 一年 8 月 · 細線連接年度數值');
+};
+const svg=document.getElementById('chart');
+const observer=new IntersectionObserver(entries=>{if(entries[0].isIntersecting){draw();observer.disconnect()}},{threshold:.2});
+observer.observe(svg);svg.addEventListener('click',draw);
+</script>
+</body>
+</html>
